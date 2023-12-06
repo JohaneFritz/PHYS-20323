@@ -1,0 +1,149 @@
+% ----------
+% A LaTeX template for course project reports
+% 
+% This template is modified from "Tech Report ala MIT AI Lab (1981)"
+% 
+% ----------
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[runin]{abstract}
+\usepackage{titling}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{helvet}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{blindtext}
+\usepackage{parskip}
+\usepackage{etoolbox}
+\usepackage{amsmath, amssymb}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+
+
+\input{preamble.tex}
+
+% ----------
+% Variables
+% ----------
+
+\title{\textbf{Scientific Analysis and Modeling:\\FINAL PROJECT report}} 
+\runningtitle{Final project} 
+\author{Johané Fritz} 
+\runningauthor{Fritz, J} 
+\affiliation{Texas Christian University}
+\department{College of Science and Enginering} 
+\memoid{PHYS 20323} 
+\theyear{2023}
+\mydate{December  11, 2023} 
+
+
+% ----------
+% actual document
+% ----------
+\begin{document}
+\maketitle
+
+
+%\vspace{2.5cm}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.65\linewidth]{Final project flow diagram.png}
+\end{figure}
+
+\thispagestyle{firstpage}
+
+\pagebreak
+
+% ----------
+% End of first page
+% ----------
+
+\newgeometry{} % Redefine geometries (normal margins)
+
+\section{Goal of project}
+\label{sec:intro}
+To model a program of the decay and energy resulting of 20,000 atoms over time and to study the attached radioactive decay from this process.
+\begin{itemize}
+  \item To plot the number of atoms of each isotope over time.
+  \item Calculate the number and energy generated from each of the decay processes.
+  \item Calculate the number and energy generated from each of the decay processes.
+  \item To find the average and standard deviation of the total and individual decay energies produced with the radioactive decay chain.
+  \item To find the thickness of a shield that will be able to safety block all of the $\alpha$-particles. 
+\end{itemize} \\
+
+\section{Procedure}
+\label{sec:conc}
+
+Started with a for-loop of 10 runs. Within each run I made a graph of the number of atoms of each isotope over time and found the total energy decay of each run. The total energy decay of each run was then used to compute an average total energy decay and a standard deviation of each energy decay process using \textit{numpy}-functions. I then calculated the shield thickness, using the average ($\alpha_{avg}$) and standard deviation ($\alpha_{std}$) of the $\alpha$-particle decay process. \\ The shield thickness was calculated with the equation :  $thickness_{shield} = \frac{\alpha_{avg}  +  3(\alpha_{std})}{1250}$
+
+
+\section{Results and Conclusions}
+\subsection*{Constants}
+\begin{itemize}
+ \item Started out with 20,000 $At^{219}$-atoms \& 0 atoms of each of the other isotopes.
+ \item Over a total time of 35,000 seconds with a 1 second time-step.
+\end{itemize}
+
+\subsection{Graph}
+\hspace{7cm} Number of atoms vs Time  
+\begin{figure}[hbt!]
+    \includegraphics[width=1.1\linewidth]{FInal project graph.png}  
+\end{figure}
+
+The results represented by the graph are as expected,  with a gradual change in the number of atoms of each of the different types of isotopes, always having a constant of 20,00 atoms at any given time. \\ Starting with 20,000 $A^{219}$-atoms and 0 atoms of each of the other isotopes at $t_0$, and ending with 20,000 $Pb^{207}$-atoms and 0 atoms of each of the other isotopes at $t_f$ also is also as expected. \\
+
+\subsection{Table of Energy decay (in $MeV$)}
+\hspace{1.2cm}\begin{tabular}{|l| c | c | c | c | c |}
+\hline
+Run & $\alpha$ & $R$ & $\beta$ & $Z$ & $Total$ \\
+\hline
+1 & $157,064$ & $1,848$ & $28,761$ & $89,796$ & $277,469$ \\
+2 & $157,112$ & $1,878$ & $28,762$ & $90,461$ & $278,213$ \\
+3 & $157,052$ & $1,899$ & $28,808$ & $89,537$ & $277,296$\\
+4 & $156,968$ & $1,971$ & $28,785$ & $89,747$ & $277,471$ \\
+5 & $156,972$ & $1,953$ & $28,800$ & $90,188$ & $277,913$ \\
+6 & $157,036$ & $1,914$ & $28,728$ & $90,006$ & $277,784$ \\
+7 & $157,000$ & $1,959$ & $28,697$ & $89,831$ & $277,487$ \\
+8 & $156,984$ & $1,941$ & $28,708$ & $89,782$ & $277,415$ \\
+9 & $157,148$ & $1,824$ & $28,749$ & $90,076$ & $277,797$ \\
+10 & $156,952$ & $1,986$ & $28,734$ & $89,586$ & $277,258$ \\
+\hline
+$\bar{x}$ & $157,028.8$ & $1,917.3$ & $28,753.2$ & $89,901.0$ & $277,600.3$ \\
+\hline
+$\sigma$ & $62.143$ & $51.552$ & $35.448$ & $268.913$ & $284.566$ \\
+\hline
+\end{tabular} \\
+
+The results of the individual and total energy decays are as expected, \\ with $\alpha$-particles contributing for majority of the total energy and with all of the results being quite precise.  
+
+\subsection{Calculating shield thickness to block all of the $\alpha$-particles}
+Average $\alpha$-particle decay energy: $\alpha_{avg}$ = 157,028.8 \\
+Standard Deviation of $\alpha$-particle decay energy: $\alpha_{std}$ = 62.143 \\
+A shield thickness of 1 cm safety blocks 1,250 MeV. \\
+Equation: 
+
+\hspace{4.8cm}$thickness_{shield} = \frac{\alpha_{avg}  +  3(\alpha_{std})}{1250}$
+
+\hspace{4.8cm}$thickness_{shield} = \frac{157,028.8  +  3(62.143)}{1250}$ \\
+
+%\vspace{2pt}
+
+\hspace{4.8cm}$thickness_{shield} = 125.772183346$ cm\\
+
+%\vspace{6pt}
+
+Therefore we can conclude that a shield with an approximate thickness of 126 cm would be able to safety block all of the $\alpha$-particles that decay from this process
+
+
+
+
+
+
+\end{document}
+
+% ----------
